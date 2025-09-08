@@ -37,11 +37,15 @@ jobs:
         echo "Fin login"
     
     - name: Build Docker image
+      env: 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: | 
         docker build -t almblanc/docker-graphql:$NEW_VERSION .
         docker build -t almblanc/docker-graphql:latest .
 
     - name: Push Docker image
+      env: 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: | 
         docker push almblanc/docker-graphql:$NEW_VERSION
         docker push almblanc/docker-graphql:latest
