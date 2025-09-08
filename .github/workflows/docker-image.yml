@@ -36,13 +36,15 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         echo "Fin login"
     
-    # - name: Build Docker image
-    #   run: | 
-    #     docker build -t almblanc/docker-graphql:0.0.2 .
+    - name: Build Docker image
+      run: | 
+        docker build -t almblanc/docker-graphql:$NEW_VERSION .
+        docker build -t almblanc/docker-graphql:latest .
 
-    # - name: Push Docker image
-    #   run: | 
-    #     docker push almblanc/docker-graphql:0.0.2
+    - name: Push Docker image
+      run: | 
+        docker push almblanc/docker-graphql:$NEW_VERSION
+        docker push almblanc/docker-graphql:latest
     
     #- name: Build the Docker image
     #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
